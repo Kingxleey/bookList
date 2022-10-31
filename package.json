@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "config": "^3.3.8",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "init": "^0.1.2",
+    "mongoose": "^6.7.0",
+    "node": "^19.0.0",
+    "start": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "name": "booklist",
+  "version": "1.0.0",
+  "description": "booklist",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github/kingxleey.git"
+  },
+  "author": "kingsley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/github/kingxleey/issues"
+  },
+  "homepage": "https://github.com/github/kingxleey#readme",
+  "keywords": []
+}
