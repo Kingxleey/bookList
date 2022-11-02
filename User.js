@@ -11,7 +11,7 @@ required: true
         required: true
     },
 
-id:{
+pages:{
     type: String,
     required:true
 },
@@ -19,7 +19,7 @@ id:{
 year:{
     type: String,
     required: true
-}
+},
 });
 
 module.exports = mongoose.model ("User", userSchema);

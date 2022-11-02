@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const User = require("./User.js");
 const express = require ("express");
+const { response } = require("express");
 const app = express();
 app.use(express.json());
 dotenv.config ({path: './config.env'});
@@ -24,22 +25,38 @@ await User.save;
 return res.status(201).send(user);
 });
 
-app.post("/update", async(req,res)=>{
-const user = await user.findById(req.body.id);
-findUser.title = req.body.title;
-findUser.author = req.body.author;
-findUser.id = req.body.id;
-findUser.yearOfPublication = req.body.yearOfPublication;
-await findUser.save();
-return res.status(201).save(findUser);
-});
+app.put('/update', async(req, res,) => {
+    const user = new User({
+      _id: req.body.id,
+      title: req.body.title,
+      author: req.body.author,
+      pages: req.body.pages,
+      year: req.body.year,
+    });
+    user.updateOne({_id: req.params.id}, user).then(
+      () => { 
+        res.status(201)
+        .json({user});
+     }
+    ).catch(
+      (error) => {
+        res.status(400)
+        .json({error: error});
+      }
+    );
+  });
 
 app.get("/getbook", async(req,res) =>{
-    const user = await user.findById(req.body.id);
-    if(user){
-        return res.status(201).save(User);
-    }
+    const user = await User.find(req.body);
+
+    res.status(200).json({
+        status:true,
+        data: {
+            user
+        }
+    })
 });
+
 app.listen(PORT, ()=>{
     console.log(`app is working fine on ${PORT}`)
 })
