@@ -33,10 +33,10 @@ app.put('/update', async(req, res) => {
       pages: req.body.pages,
       year: req.body.year,
     });
-    user.updateOne({id: req.body.id}, user).then(
+    user.updateOne( {id: req.body.id} , user).then(
       () => { 
         res.status(201)
-        .json({user});
+        .send({user});
      }
     ).catch(
       (error) => {
@@ -47,14 +47,10 @@ app.put('/update', async(req, res) => {
   });
 
 app.get("/getbook", async(req,res) =>{
-    const user = await User.find(req.body);
 
-    res.status(200).json({
-        status:true,
-        data: {
-            user
-        }
-    })
+  const reqBody = req.body;
+  const user = User(reqBody.id);
+ res.status(200).send({User});
 });
 
 app.listen(PORT, ()=>{
