@@ -27,13 +27,13 @@ return res.status(201).send(user);
 
 app.put('/update', async(req, res,) => {
     const user = new User({
-      _id: req.body.id,
+      id: req.body.id,
       title: req.body.title,
       author: req.body.author,
       pages: req.body.pages,
       year: req.body.year,
     });
-    user.updateOne({_id: req.params.id}, user).then(
+    user.updateOne({id: req.params.id}, user).then(
       () => { 
         res.status(201)
         .json({user});
