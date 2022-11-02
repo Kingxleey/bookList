@@ -33,7 +33,7 @@ app.put('/update', async(req, res) => {
       pages: req.body.pages,
       year: req.body.year,
     });
-    user.updateOne({id: req.params.id}, user).then(
+    user.updateOne({id: req.body.id}, user).then(
       () => { 
         res.status(201)
         .json({user});
