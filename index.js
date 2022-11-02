@@ -49,8 +49,8 @@ app.put('/update', async(req, res) => {
 app.get("/getbook", async(req,res) =>{
 
   const reqBody = req.body;
-  const user = User(reqBody.id);
- res.status(200).send({User});
+  const user =  User(reqBody);
+ res.status(200).send({user});
 });
 
 app.listen(PORT, ()=>{
