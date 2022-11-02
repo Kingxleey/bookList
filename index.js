@@ -25,7 +25,7 @@ await User.save;
 return res.status(201).send(user);
 });
 
-app.put('/update', async(req, res,) => {
+app.put('/update', async(req, res) => {
     const user = new User({
       id: req.body.id,
       title: req.body.title,
