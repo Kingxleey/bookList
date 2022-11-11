@@ -19,7 +19,7 @@ const {PORT, db_url} = process.env;
 
 app.post("/create", async(req,res)=>{
 const reqBody = req.body;
-const user = new User(reqBody);
+const user = new User (reqBody);
 await User.save;
 return res.status(201).send(user);
 });
