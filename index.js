@@ -7,6 +7,34 @@ app.use(express.json());
 dotenv.config ({path: './config.env'});
 
 
+
+
+// let MongoClient = require('mongodb').MongoClient;
+// let connectionUrl = "mongodb://localhost:5000/";
+// // or
+// // let connectionUrl = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority";
+
+// // creating the message object
+// let obj = {"text" : "Something"};
+
+// console.log("OBJ: " + obj);
+
+// MongoClient.connect(connectionUrl, function(err, client) {
+//     if (err) throw err;
+    
+//     console.log("Connected correctly to server");
+
+//     // if database and collection do not exist they are created
+    
+//     var db = client.db('YourDatabase')
+    
+//     db.collection("YourCollection").insertOne(obj, function(err, res) {
+//         if (err) throw err;
+//         console.log("1 message inserted");
+//         client.close();
+//     });
+// });
+
 const {PORT, db_url} = process.env;
 
  mongoose.connect(db_url)
