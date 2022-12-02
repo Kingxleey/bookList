@@ -20,8 +20,12 @@ const {PORT, db_url} = process.env;
 app.post("/create", async(req,res)=>{
 const reqBody = req.body;
 const user = new User (reqBody);
-await User.save;
-return res.status(201).send(user);
+await user.save().then(() =>{
+  return res.status(201).send(user)
+})
+  .catch((err)=>{
+    return res.status(400).send(err)
+})
 });
 
 app.put('/update', async(req, res) => {
@@ -46,10 +50,9 @@ app.put('/update', async(req, res) => {
   });
 
 app.get("/getbook", async(req,res) =>{
-
-  const reqBody = req.body;
-  const user =  User(reqBody);
- res.status(200).send({user});
+ const reqBody = req.body;
+  const user =  await User(reqBody);
+ res.status(200).send(user);
 });
 
 app.listen(PORT, ()=>{
