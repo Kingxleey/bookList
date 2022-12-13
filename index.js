@@ -1,39 +1,11 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const User = require("./User.js");
+const User = require("./User");
 const express = require ("express");
 const app = express();
 app.use(express.json());
 dotenv.config ({path: './config.env'});
 
-
-
-
-// let MongoClient = require('mongodb').MongoClient;
-// let connectionUrl = "mongodb://localhost:5000/";
-// // or
-// // let connectionUrl = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority";
-
-// // creating the message object
-// let obj = {"text" : "Something"};
-
-// console.log("OBJ: " + obj);
-
-// MongoClient.connect(connectionUrl, function(err, client) {
-//     if (err) throw err;
-    
-//     console.log("Connected correctly to server");
-
-//     // if database and collection do not exist they are created
-    
-//     var db = client.db('YourDatabase')
-    
-//     db.collection("YourCollection").insertOne(obj, function(err, res) {
-//         if (err) throw err;
-//         console.log("1 message inserted");
-//         client.close();
-//     });
-// });
 
 const {PORT, db_url} = process.env;
 
@@ -57,30 +29,40 @@ await user.save().then(() =>{
 });
 
 app.put('/update', async(req, res) => {
-    const user = new User({
-      id: req.body.id,
+  try{
+    const user = ({
+     // id: req.body.id,
       title: req.body.title,
-      author: req.body.author,
+     // author: req.body.author,
       pages: req.body.pages,
       year: req.body.year,
     });
-    user.updateOne( {id: req.body.id} , user).then(
-      () => { 
-        res.status(201)
-        .send({user});
-     }
-    ).catch(
+   
+   let userTwo = await User.findOneAndUpdate( {author: req.query.author} , user, {new:true})
+  //  .then(
+  //     () => { 
+       return res.status(201)
+        .send(userTwo);
+     //}
+  } catch {
       (error) => {
+        console.log(error.message)
         res.status(400)
         .json({error: error});
       }
-    );
+    };
   });
 
+
 app.get("/getbook", async(req,res) =>{
- const reqBody = req.body;
-  const user =  await User(reqBody);
- res.status(200).send(user);
+  const id = req.params.id
+ const user = await User.findbyId({id})
+  .then(() =>{
+      return res.status(200).send(user)
+    })
+.catch((error) =>{
+ return res.status(400).send(error);
+});
 });
 
 app.listen(PORT, ()=>{

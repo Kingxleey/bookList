@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema ({
     required: true
     },
 
-author: {
-        type:String,
+author:{
+        type:Array,
         required: true
     },
 pages:{
